@@ -1,6 +1,5 @@
 import { Category, categories } from "@/data/galleryData";
 
-// Props interface for the FilterButtons component
 interface FilterButtonsProps {
   activeFilter: Category;
   onFilterChange: (category: Category) => void;
@@ -8,22 +7,22 @@ interface FilterButtonsProps {
 
 /**
  * FilterButtons Component
- * Displays category filter buttons that allow users to filter gallery images
- * Highlights the active filter with an accent color
+ * Simple tab-style filters for gallery categories
  */
 const FilterButtons = ({ activeFilter, onFilterChange }: FilterButtonsProps) => {
-  // Format category name for display (capitalize first letter)
   const formatCategoryName = (category: string): string => {
     return category.charAt(0).toUpperCase() + category.slice(1);
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+    <div className="flex overflow-x-auto border-b border-border">
       {categories.map((category) => (
         <button
           key={category}
           onClick={() => onFilterChange(category)}
-          className={`filter-button ${activeFilter === category ? "active" : ""}`}
+          className={`filter-tab whitespace-nowrap ${
+            activeFilter === category ? "active" : ""
+          }`}
           aria-pressed={activeFilter === category}
         >
           {formatCategoryName(category)}
